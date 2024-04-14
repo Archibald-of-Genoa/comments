@@ -4,6 +4,8 @@ import { buildLoaders } from "./buildLoaders";
 import { buildPlugins } from "./buildPlugins";
 import { buildResolvers } from "./buildResolvers";
 import { BuildOptions } from "./types/types";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+
 
 
 export function buildWebpack(options: BuildOptions): webpack.Configuration {

@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comments</title>
-<script defer src="main.39a92d0776c2b49caee4.js"></script></head>
-<body>
-    Hello world
-</body>
+  <script defer src="main.e78174a3feeba0dadaba.js"></script></head>
+  <body>
+    <header class="header"></header>
+    <section class="hero">
+      <aside></aside>
+
+      <div class="contentMock-wrapper">
+        <div class="contentMock"></div>
+        <nav class="comment-filters">
+          <ul class="filter-links">
+            <li>
+              <a class="comments-link active" href="#">Комментарии</a>
+            </li>
+            <li class="selectList">
+              <label for="comment-sort"></label>
+
+              <select id="comment-sort" name="comment-sort">
+                <option value="byDate">По дате</option>
+                <option value="byRating">По количеству оценок</option>
+                <option value="byRelevance">По актуальности</option>
+                <option value="byAnswers">По количеству ответов</option>
+              </select>
+
+              <img id="arrow" alt="Иконка стрелка" />
+            </li>
+
+            <li><a class="favorite" href="#"> Избранное </a></li>
+          </ul>
+        </nav>
+
+        <img src="" alt="" />
+      </div>
+    </section>
+  </body>
 </html>
