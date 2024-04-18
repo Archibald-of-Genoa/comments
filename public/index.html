@@ -30,11 +30,25 @@
               <img id="arrow" alt="Иконка стрелка" />
             </li>
 
-            <li><a class="favorite" href="#"> Избранное </a></li>
+            <li class="favoriteList">
+              <a class="favorite" href="#"> Избранное </a>
+              <img id="heart" alt="Иконка Избранное" />
+            </li>
           </ul>
         </nav>
 
-        <img src="" alt="" />
+        <div class="newCommentBlock">
+          <img id="userAvatar" alt="Аватар пользователя">
+
+          <span id="userName"></span>
+
+          <div class="warning">Макс. 10 символов</div>
+
+          <form action="submit">
+            <label for="comment"></label>
+            <textarea name="comment" id="comment" cols="30" rows="10" maxlength="10" placeholder="Введите текст сообщения" required></textarea>
+            <button class="send-btn btn">Отправить</button>
+          </form>
       </div>
     </section>
   </body>

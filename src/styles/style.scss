@@ -1,5 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swp");
 
+$font-primary: Inter;
+$font-size-base: 1.6rem;
+$font-size-lg: 1.8rem;
+$font-size-md: 1.6rem;
+$font-size-sm: 1.4rem;
+
+$font-weight-reg: 400;
+$font-weight-med: 500;
+
+$font-style: italic;
+
+$primary-color: #d9d9d9;
+
+@mixin font-base {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-reg;
+  color: #000;
+}
+
+@mixin font-lg {
+  font-family: $font-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-reg;
+  color: #000;
+}
+
+@mixin font-user {
+  font-family: $font-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-med;
+  color: #122ac0;
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
@@ -8,12 +42,8 @@ html {
 .favorite,
 select,
 ul {
-  font-size: 1.6rem;
-  color: #000;
-  font-family: "Inter", sans-serif;
-  font-weight: normal;
+  @include font-base;
 }
-
 
 body {
   margin: 0 auto;
@@ -24,7 +54,7 @@ body {
   margin: 0 auto;
   width: 1440px;
   height: 101px;
-  background-color: #d9d9d9;
+  background-color: $primary-color;
   margin-bottom: 4rem;
 }
 
@@ -37,7 +67,7 @@ aside {
   width: 203px;
   height: 1302px;
   margin: 0 8.6rem 0 0;
-  background-color: #d9d9d9;
+  background-color: $primary-color;
 }
 
 .contentMock-wrapper {
@@ -56,14 +86,14 @@ aside {
 
 .contentMockElement {
   height: 61px;
-  background-color: #d9d9d9;
+  background-color: $primary-color;
 
   &.span {
     margin-top: 10px;
     width: 100%;
     height: auto;
     grid-column: span 2;
-    background-color: #d9d9d9;
+    background-color: $primary-color;
   }
 }
 
@@ -74,12 +104,14 @@ aside {
   width: 100%;
   height: 5.5rem;
   margin-bottom: 32px;
+  margin-top: 4rem;
 
   .filter-links {
     width: 60.3rem;
     margin: 0;
     display: flex;
     justify-content: start;
+    align-items: end;
     gap: 50px;
     padding: 0;
   }
@@ -105,7 +137,6 @@ aside {
 
     padding-right: 20px;
 
-
     option {
       text-decoration: underline;
     }
@@ -116,24 +147,91 @@ aside {
   }
 
   .select-rotated {
-    transform: rotate(180deg); 
-    -webkit-transform: rotate(180deg); 
-}
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+  }
 
-  .favorite {
-    border: none;
-    background-color: #fff;
-    text-decoration: underline;
-    opacity: 0.4;
+  .favoriteList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.95rem;
+    width: 11.7rem;
+
+    .favorite {
+      border: none;
+      background-color: #fff;
+      text-decoration: underline;
+      opacity: 0.4;
+      text-align: left;
+    }
   }
 
   .comments-link {
-    font-size: 2rem;
-    font-weight: 500;
-    color: #000;
+    @include font-lg;
+    font-size: 20px;
   }
 
   a {
-    font-size: 1.6rem;
+    @include font-base;
   }
+}
+
+.newCommentBlock {
+  width: 100%;
+  height: 9.8rem;
+
+  #userAvatar {
+    width: 61px;
+    height: 61px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  #userName {
+    @include font-user;
+  }
+
+  .warning {
+    display: none;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    #comment {
+      @include font-lg;
+      field-sizing: content;
+      overflow-y: hidden;
+      padding: 20px;
+      padding-left: 30px;
+      text-align: start;
+      outline: none;
+      width: 66.8rem;
+      min-height: 6.1rem;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+      resize: none;
+    }
+
+    #comment::placeholder {
+      color: #000000;
+      opacity: .4;
+    }
+
+
+  }
+}
+
+.btn {
+  @include font-lg;
+  width: 213px;
+  height: 61px;
+  background-color: #A1A1A1;
+  opacity: .4;
+  border-radius: 5px;
+  border: none;
 }

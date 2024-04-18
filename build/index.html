@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comments</title>
-  <script defer src="main.e78174a3feeba0dadaba.js"></script></head>
+  <script defer src="main.c64f3e02b1da677f97cb.js"></script></head>
   <body>
     <header class="header"></header>
     <section class="hero">
@@ -30,11 +30,25 @@
               <img id="arrow" alt="Иконка стрелка" />
             </li>
 
-            <li><a class="favorite" href="#"> Избранное </a></li>
+            <li class="favoriteList">
+              <a class="favorite" href="#"> Избранное </a>
+              <img id="heart" alt="Иконка Избранное" />
+            </li>
           </ul>
         </nav>
 
-        <img src="" alt="" />
+        <div class="newCommentBlock">
+          <img id="userAvatar" alt="Аватар пользователя">
+
+          <span id="userName"></span>
+
+          <div id="alert"></div>
+
+          <form action="submit">
+            <label for="comment"></label>
+            <textarea name="comment" id="" cols="30" rows="10" placeholder="Введите текст сообщения" required></textarea>
+            <button class="send-btn btn">Отправить</button>
+          </form>
       </div>
     </section>
   </body>
