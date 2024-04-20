@@ -10,14 +10,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const heart = document.getElementById("heart") as HTMLImageElement;
   const textarea = document.getElementById("comment") as HTMLTextAreaElement;
   const warning = document.querySelector(".warning") as HTMLDivElement;
+  const sendBtn = document.querySelector(".send-btn") as HTMLButtonElement;
+
+
   
   textarea.addEventListener('input', function() {
     const messageLength = textarea.value.length;
 
     if (messageLength === 10) {
+      sendBtn.disabled = true;
       warning.style.display = "block";
     } else {
       warning.style.display = "none";
+      sendBtn.disabled = false;
+
     }
   
   })

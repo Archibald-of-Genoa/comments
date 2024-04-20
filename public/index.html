@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comments</title>
   </head>
+
   <body>
     <header class="header"></header>
     <section class="hero">
@@ -38,17 +39,29 @@
         </nav>
 
         <div class="newCommentBlock">
-          <img id="userAvatar" alt="Аватар пользователя">
+          <img id="userAvatar" alt="Аватар пользователя" />
+          <div class="userNameAndFormWrapper">
+            <div class="userNameWrapper">
+              <span id="userName"></span>
 
-          <span id="userName"></span>
+              <div class="warning">Макс. 10 символов</div>
+            </div>
 
-          <div class="warning">Макс. 10 символов</div>
-
-          <form action="submit">
-            <label for="comment"></label>
-            <textarea name="comment" id="comment" cols="30" rows="10" maxlength="10" placeholder="Введите текст сообщения" required></textarea>
-            <button class="send-btn btn">Отправить</button>
-          </form>
+            <form action="submit">
+              <label for="comment"></label>
+              <textarea
+                name="comment"
+                id="comment"
+                cols="30"
+                rows="10"
+                maxlength="10"
+                placeholder="Введите текст сообщения"
+                required
+              ></textarea>
+              <button class="send-btn btn">Отправить</button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   </body>

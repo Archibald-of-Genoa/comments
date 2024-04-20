@@ -9,8 +9,6 @@ $font-size-sm: 1.4rem;
 $font-weight-reg: 400;
 $font-weight-med: 500;
 
-$font-style: italic;
-
 $primary-color: #d9d9d9;
 
 @mixin font-base {
@@ -32,6 +30,13 @@ $primary-color: #d9d9d9;
   font-size: $font-size-lg;
   font-weight: $font-weight-med;
   color: #122ac0;
+}
+@mixin font-italic {
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  font-style: italic;
+  color: #000;
+  opacity: 0.4;
 }
 
 html {
@@ -180,6 +185,10 @@ aside {
 .newCommentBlock {
   width: 100%;
   height: 9.8rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
 
   #userAvatar {
     width: 61px;
@@ -188,11 +197,26 @@ aside {
     display: inline-block;
   }
 
+  .userNameAndFormWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .userNameWrapper {
+    width: 68.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   #userName {
     @include font-user;
   }
 
   .warning {
+    @include font-italic;
     display: none;
   }
 
@@ -200,6 +224,12 @@ aside {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 93.1rem;
+    gap: 30px;
+
+    label {
+      display: none;
+    }
 
     #comment {
       @include font-lg;
@@ -209,7 +239,7 @@ aside {
       padding-left: 30px;
       text-align: start;
       outline: none;
-      width: 66.8rem;
+      width: 68.8rem;
       min-height: 6.1rem;
       border-radius: 5px;
       border: none;
@@ -219,10 +249,8 @@ aside {
 
     #comment::placeholder {
       color: #000000;
-      opacity: .4;
+      opacity: 0.4;
     }
-
-
   }
 }
 
@@ -230,8 +258,16 @@ aside {
   @include font-lg;
   width: 213px;
   height: 61px;
-  background-color: #A1A1A1;
-  opacity: .4;
   border-radius: 5px;
   border: none;
+  background-color: #ABD873;
+  cursor: pointer;
+  
+}
+
+.btn:disabled {
+  background-color: #a1a1a1;
+  opacity: 0.4;
+  color: #000;
+  cursor: default;
 }
