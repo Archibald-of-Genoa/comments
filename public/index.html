@@ -11,7 +11,7 @@
     <section class="hero">
       <aside></aside>
 
-      <div class="contentMock-wrapper">
+      <div class="wrapper">
         <div class="contentMock"></div>
         <nav class="comment-filters">
           <ul class="filter-links">
@@ -38,33 +38,33 @@
           </ul>
         </nav>
 
-        <div class="newCommentBlock">
-          <img id="userAvatar" alt="Аватар пользователя" />
-          <div class="userNameAndFormWrapper">
-            <div class="userNameWrapper">
-              <span id="userName"></span>
+        <div class="commentsBlock">
+          <div class="newCommentBlock">
+            <img id="userAvatar" alt="Аватар пользователя" />
+            <div class="userNameAndFormWrapper">
+              <div class="userNameWrapper">
+                <span id="userName"></span>
 
-              <div class="warning">Макс. 10 символов</div>
+                <div class="warning">Макс. 10 символов</div>
+              </div>
+
+              <form id="commentForm" action="submit">
+                <label for="comment"></label>
+                <textarea
+                  name="comment"
+                  id="comment"
+                  cols="30"
+                  rows="10"
+                  maxlength="10"
+                  placeholder="Введите текст сообщения"
+                  required
+                ></textarea>
+                <button type="submit" class="send-btn btn">Отправить</button>
+              </form>
             </div>
-
-            <form id="commentForm" action="submit">
-              <label for="comment"></label>
-              <textarea
-                name="comment"
-                id="comment"
-                cols="30"
-                rows="10"
-                maxlength="10"
-                placeholder="Введите текст сообщения"
-                required
-              ></textarea>
-              <button class="send-btn btn">Отправить</button>
-            </form>
           </div>
+
         </div>
-
-
-
       </div>
     </section>
   </body>

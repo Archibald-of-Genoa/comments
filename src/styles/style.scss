@@ -75,7 +75,7 @@ aside {
   background-color: $primary-color;
 }
 
-.contentMock-wrapper {
+.wrapper {
   width: 1022px;
   height: 100vh;
 }
@@ -180,6 +180,11 @@ aside {
   a {
     @include font-base;
   }
+}
+
+.commentsBlock {
+  display: flex;
+  flex-direction: column;
 }
 
 .newCommentBlock {

@@ -6,21 +6,33 @@ import heartImage from "@/assets/heart.svg";
 document.addEventListener("DOMContentLoaded", function () {
   const contentMock = document.querySelector(".contentMock");
   const contentMockCount = 9;
-  const arrow = <HTMLImageElement>document.getElementById("arrow");
-  const heart = <HTMLImageElement>document.getElementById("heart");
-  const textarea = <HTMLTextAreaElement>document.getElementById("comment");
-  const warning = <HTMLDivElement>document.querySelector(".warning");
-  const sendBtn = <HTMLButtonElement>document.querySelector(".send-btn");
-  const comment = <HTMLTextAreaElement>document.getElementById("comment");
-  const commentForm = <HTMLFormElement>document.getElementById("commentForm");
+  const commentsBlock = <HTMLDivElement>document.querySelector(".commentsBlock");
+  const arrow = <HTMLImageElement | null>document.getElementById("arrow");
+  const heart = <HTMLImageElement | null>document.getElementById("heart");
+  const textarea = <HTMLTextAreaElement | null>(
+    document.getElementById("comment")
+  );
+  const warning = <HTMLDivElement | null>document.querySelector(".warning");
+  const sendBtn = <HTMLButtonElement | null>document.querySelector(".send-btn");
+  const comment = <HTMLTextAreaElement | null>(
+    document.getElementById("comment")
+  );
+  const commentForm = <HTMLFormElement | null>(
+    document.getElementById("commentForm")
+  );
   const select = document.getElementById("comment-sort");
-
+  const newCommentBlock = <HTMLElement | null>(
+    document.querySelector(".newCommentBlock")
+  );
   commentForm.addEventListener("submit", function (event: Event) {
     event.preventDefault();
     const commentText = comment.value;
     if (commentText.trim() === "") return;
 
     const newComment = <HTMLDivElement>document.createElement("div");
+    newComment.textContent = commentText;
+    newComment.classList.add(".newComment");
+    commentsBlock.appendChild(newComment);
   });
 
   textarea.addEventListener("input", function () {
