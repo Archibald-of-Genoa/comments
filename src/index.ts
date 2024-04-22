@@ -6,30 +6,34 @@ import heartImage from "@/assets/heart.svg";
 document.addEventListener("DOMContentLoaded", function () {
   const contentMock = document.querySelector(".contentMock");
   const contentMockCount = 9;
-  const arrow = document.getElementById("arrow") as HTMLImageElement;
-  const heart = document.getElementById("heart") as HTMLImageElement;
-  const textarea = document.getElementById("comment") as HTMLTextAreaElement;
-  const warning = document.querySelector(".warning") as HTMLDivElement;
-  const sendBtn = document.querySelector(".send-btn") as HTMLButtonElement;
+  const arrow = <HTMLImageElement>document.getElementById("arrow");
+  const heart = <HTMLImageElement>document.getElementById("heart");
+  const textarea = <HTMLTextAreaElement>document.getElementById("comment");
+  const warning = <HTMLDivElement>document.querySelector(".warning");
+  const sendBtn = <HTMLButtonElement>document.querySelector(".send-btn");
+  const comment = <HTMLTextAreaElement>document.getElementById("comment");
+  const commentForm = <HTMLFormElement>document.getElementById("commentForm");
+  const select = document.getElementById("comment-sort");
 
+  commentForm.addEventListener("submit", function (event: Event) {
+    event.preventDefault();
+    const commentText = comment.value;
+    if (commentText.trim() === "") return;
 
-  
-  textarea.addEventListener('input', function() {
+    const newComment = <HTMLDivElement>document.createElement("div");
+  });
+
+  textarea.addEventListener("input", function () {
     const messageLength = textarea.value.length;
 
-    if (messageLength === 10) {
+    if (messageLength >= 10) {
       sendBtn.disabled = true;
       warning.style.display = "block";
     } else {
       warning.style.display = "none";
       sendBtn.disabled = false;
-
     }
-  
-  })
-
-
-
+  });
 
   if (arrow) {
     arrow.src = arrowImage;
@@ -39,8 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const toggleArrowRotation = () => arrow.classList.toggle("select-rotated");
-
-  const select = document.getElementById("comment-sort");
 
   select.addEventListener("mousedown", toggleArrowRotation);
   select.addEventListener("mouseup", toggleArrowRotation);
@@ -53,8 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     contentMock.appendChild(subcontent);
   }
-
-  
 });
 
 async function randomUserData(): Promise<void> {
@@ -82,7 +82,5 @@ async function randomUserData(): Promise<void> {
     return null;
   }
 }
-
-
 
 randomUserData();
