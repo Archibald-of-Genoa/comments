@@ -3,6 +3,8 @@ import "./styles/style.scss";
 import arrowImage from "@/assets/Arrow.svg";
 import heartImage from "@/assets/heart.svg";
 import replyImage from "@/assets/reply.svg";
+import { loadUserData } from "./fetchUserData";
+import { userInfo } from "os";
 
 document.addEventListener("DOMContentLoaded", function () {
   const contentMock = document.querySelector(".contentMock");
@@ -18,9 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const warning = <HTMLDivElement | null>document.querySelector(".warning");
   const sendBtn = <HTMLButtonElement | null>document.querySelector(".send-btn");
-  const comment = <HTMLTextAreaElement | null>(
-    document.getElementById("comment")
-  );
+
   const commentForm = <HTMLFormElement | null>(
     document.getElementById("commentForm")
   );
@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     const newPublishedComment = document.createElement("div");
 
-    const commentText = comment.value;
+    const commentText = textarea.value;
     if (commentText.trim() === "") return;
-    
-    comment.value = "";
+
+    textarea.value = "";
 
     newPublishedComment.innerHTML = `
     <div class="publishedComment">
@@ -86,8 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const publishedCommentText = <HTMLElement | null>(
       document.querySelector(".publishedCommentText")
     );
-
-
   });
 
   textarea.addEventListener("input", function () {
@@ -115,19 +113,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     contentMock.appendChild(subcontent);
   }
-});
 
-async function randomUserData(): Promise<void> {
-  try {
-    const response = await fetch("https://randomuser.me/api/");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const userAvatarImage = data.results[0].picture.large;
-
-    const userAvatar =
+  loadUserData("https://randomuser.me/api/").then((userData) => {
+    if (userData) {
+      const userAvatarImage = userData.avatar;
+      const userAvatar =
       document.querySelectorAll<HTMLImageElement>(".userAvatar");
 
     userAvatar.forEach((avatar) => {
@@ -136,18 +126,42 @@ async function randomUserData(): Promise<void> {
       }
     });
 
-    const userLogin = data.results[0].login.username;
-    const userName = document.querySelectorAll<HTMLSpanElement>(".userName");
 
-    userName.forEach((uName) => {
-      if (uName) {
-        uName.textContent = userLogin;
-      }
-    });
-  } catch (error) {
-    console.error("Ошибка при получении данных", error);
-    return null;
-  }
-}
+    }
+  });
+});
 
-randomUserData();
+// async function randomUserData(): Promise<void> {
+//   try {
+//     const response = await fetch("https://randomuser.me/api/");
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     const userAvatarImage = data.results[0].picture.large;
+
+//     const userAvatar =
+//       document.querySelectorAll<HTMLImageElement>(".userAvatar");
+
+//     userAvatar.forEach((avatar) => {
+//       if (avatar) {
+//         avatar.src = userAvatarImage;
+//       }
+//     });
+
+//     const userLogin = data.results[0].login.username;
+//     const userName = document.querySelectorAll<HTMLSpanElement>(".userName");
+
+//     userName.forEach((uName) => {
+//       if (uName) {
+//         uName.textContent = userLogin;
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Ошибка при получении данных", error);
+//     return null;
+//   }
+// }
+
+// randomUserData();
