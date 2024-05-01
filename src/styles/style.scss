@@ -109,7 +109,7 @@ aside {
   }
 }
 
-.comment-filters {
+.comments-filter {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -135,6 +135,10 @@ aside {
   .selectList {
     display: flex;
     align-items: center;
+
+    #comment-sort {
+      cursor: pointer;
+    }
   }
 
   select {
@@ -156,6 +160,12 @@ aside {
     &:focus {
       outline: none;
     }
+
+
+  }
+
+  #arrow {
+    cursor: pointer;
   }
 
   .select-rotated {

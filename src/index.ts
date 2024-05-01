@@ -1,30 +1,41 @@
 import "./styles/reset.css";
 import "./styles/style.scss";
-import arrowImage from "@/assets/Arrow.svg";
-import heartImage from "@/assets/heart.svg";
-import replyImage from "@/assets/reply.svg";
+
 import { loadUserData } from "./fetchUserData";
-import { userInfo } from "os";
+import { addContentMock } from "./contentMock";
+import { commentsFilter } from "./commentsFilter";
+import { newCommentForm } from "./newCommentForm";
+import SingleComment from "./Comment";
+import CommentService from "./CommentService";
 
 document.addEventListener("DOMContentLoaded", function () {
-  const contentMock = document.querySelector(".contentMock");
-  const contentMockCount = 9;
-  const commentsBlock = <HTMLDivElement>(
-    document.querySelector(".commentsBlock")
-  );
-  const arrow = <HTMLImageElement | null>document.getElementById("arrow");
-  const heart = <HTMLImageElement | null>document.getElementById("heart");
-  const reply = <HTMLImageElement | null>document.querySelector(".reply");
-  const textarea = <HTMLTextAreaElement | null>(
-    document.getElementById("comment")
-  );
-  const warning = <HTMLDivElement | null>document.querySelector(".warning");
-  const sendBtn = <HTMLButtonElement | null>document.querySelector(".send-btn");
+  addContentMock(9);
+  commentsFilter();
+  newCommentForm();
+
+  loadUserData("https://randomuser.me/api/").then((userData) => {
+    if (userData) {
+
+    const example = new SingleComment(userData.uuid, userData.username, userData.avatar)
+    const control = new CommentService(example)
+
+      const userAvatarImage = example.avatar;
+      const userAvatar =
+        document.querySelectorAll<HTMLImageElement>(".userAvatar");
+
+      userAvatar.forEach((avatar) => {
+        if (avatar) {
+          avatar.src = userAvatarImage;
+        } else {
+          console.log("No user data received");
+        }
+      });
+    }
+  });
 
   const commentForm = <HTMLFormElement | null>(
     document.getElementById("commentForm")
   );
-  const select = document.getElementById("comment-sort");
   const publishedComment = <HTMLElement | null>(
     document.querySelector(".publishedComment")
   );
@@ -40,128 +51,43 @@ document.addEventListener("DOMContentLoaded", function () {
     return `${day}.${month} ${hours}:${minutes}`;
   }
 
-  if (arrow) {
-    arrow.src = arrowImage;
-  }
-  if (heart) {
-    heart.src = heartImage;
-  }
-  if (reply) {
-    reply.src = replyImage;
-  }
+  // commentForm.addEventListener("submit", function (event: Event) {
+  //   event.preventDefault();
+  //   const newPublishedComment = document.createElement("div");
 
-  commentForm.addEventListener("submit", function (event: Event) {
-    event.preventDefault();
-    const newPublishedComment = document.createElement("div");
+  //   const commentText = textarea.value;
+  //   if (commentText.trim() === "") return;
 
-    const commentText = textarea.value;
-    if (commentText.trim() === "") return;
+  //   textarea.value = "";
 
-    textarea.value = "";
+  //   newPublishedComment.innerHTML = `
+  //   <div class="publishedComment">
+  //           <img class="userAvatar" alt="Аватар пользователя" />
 
-    newPublishedComment.innerHTML = `
-    <div class="publishedComment">
-            <img class="userAvatar" alt="Аватар пользователя" />
+  //           <div class="userNameAndFormWrapper">
 
-            <div class="userNameAndFormWrapper">
+  //               <div class="userNameWrapper">
+  //                 <span class="userName"></span>
 
-                <div class="userNameWrapper">
-                  <span class="userName"></span>
-          
-                  <div class="date">${getFormattedDate()}</div>
-                </div>
+  //                 <div class="date">${getFormattedDate()}</div>
+  //               </div>
 
-                <div class="publishedCommentText">${commentText}</div>
-            </div>
+  //               <div class="publishedCommentText">${commentText}</div>
+  //           </div>
 
-            <div class="actionButtons">
-              <button class="reply">Ответить</button>
-            </div>
+  //           <div class="actionButtons">
+  //             <button class="reply">Ответить</button>
+  //           </div>
 
-          </div>
-    `;
+  //         </div>
+  //   `;
 
-    commentsBlock.appendChild(newPublishedComment);
+  //   commentsBlock.appendChild(newPublishedComment);
 
-    const publishedCommentText = <HTMLElement | null>(
-      document.querySelector(".publishedCommentText")
-    );
-  });
+  //   const publishedCommentText = <HTMLElement | null>(
+  //     document.querySelector(".publishedCommentText")
+  //   );
+  // });
 
-  textarea.addEventListener("input", function () {
-    const messageLength = textarea.value.length;
-
-    if (messageLength >= 1000) {
-      sendBtn.disabled = true;
-      warning.style.display = "block";
-    } else {
-      warning.style.display = "none";
-      sendBtn.disabled = false;
-    }
-  });
-
-  const toggleArrowRotation = () => arrow.classList.toggle("select-rotated");
-
-  select.addEventListener("mousedown", toggleArrowRotation);
-  select.addEventListener("mouseup", toggleArrowRotation);
-
-  for (let i = 0; i < contentMockCount; i++) {
-    const subcontent = document.createElement("div");
-    subcontent.classList.add("contentMockElement");
-    if (i === contentMockCount - 1) {
-      subcontent.classList.add("span");
-    }
-    contentMock.appendChild(subcontent);
-  }
-
-  loadUserData("https://randomuser.me/api/").then((userData) => {
-    if (userData) {
-      const userAvatarImage = userData.avatar;
-      const userAvatar =
-      document.querySelectorAll<HTMLImageElement>(".userAvatar");
-
-    userAvatar.forEach((avatar) => {
-      if (avatar) {
-        avatar.src = userAvatarImage;
-      }
-    });
-
-
-    }
-  });
+  
 });
-
-// async function randomUserData(): Promise<void> {
-//   try {
-//     const response = await fetch("https://randomuser.me/api/");
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     const userAvatarImage = data.results[0].picture.large;
-
-//     const userAvatar =
-//       document.querySelectorAll<HTMLImageElement>(".userAvatar");
-
-//     userAvatar.forEach((avatar) => {
-//       if (avatar) {
-//         avatar.src = userAvatarImage;
-//       }
-//     });
-
-//     const userLogin = data.results[0].login.username;
-//     const userName = document.querySelectorAll<HTMLSpanElement>(".userName");
-
-//     userName.forEach((uName) => {
-//       if (uName) {
-//         uName.textContent = userLogin;
-//       }
-//     });
-//   } catch (error) {
-//     console.error("Ошибка при получении данных", error);
-//     return null;
-//   }
-// }
-
-// randomUserData();

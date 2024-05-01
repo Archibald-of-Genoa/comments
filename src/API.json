@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": { "title": "Ms", "first": "Mali", "last": "Vika" },
+      "location": {
+        "street": { "number": 9591, "name": "Vallegata" },
+        "city": "Grinde",
+        "state": "Trøndelag",
+        "country": "Norway",
+        "postcode": "6403",
+        "coordinates": { "latitude": "44.0297", "longitude": "176.7970" },
+        "timezone": {
+          "offset": "-5:00",
+          "description": "Eastern Time (US & Canada), Bogota, Lima"
+        }
+      },
+      "email": "mali.vika@example.com",
+      "login": {
+        "uuid": "9ef4fe3e-70d1-43c4-a86c-089ce978c88e",
+        "username": "silverbird587",
+        "password": "graves",
+        "salt": "bYfnVs7F",
+        "md5": "d7ae965e801eb9f67c465cd6fba8de19",
+        "sha1": "3e75bafd6068fd2c9ddfb74eb7ea72b12766fd63",
+        "sha256": "a8135d05c47410e12b7a7db768e4af58241d29e61b7e61b64e098c4844f607c2"
+      },
+      "dob": { "date": "1977-08-01T18:15:13.027Z", "age": 46 },
+      "registered": { "date": "2018-05-16T11:30:49.920Z", "age": 5 },
+      "phone": "64585598",
+      "cell": "90282925",
+      "id": { "name": "FN", "value": "01087744066" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/85.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/85.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/85.jpg"
+      },
+      "nat": "NO"
+    }
+  ],
+  "info": {
+    "seed": "bab8cc8ad7192070",
+    "results": 1,
+    "page": 1,
+    "version": "1.4"
+  }
+}

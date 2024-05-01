@@ -1,6 +1,7 @@
+import { UUID } from "crypto";
 
 interface IUser {
-  uuid: string;
+  uuid: UUID;
   username: string;
   avatar: string;
 }
