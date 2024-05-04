@@ -1,5 +1,5 @@
 import { json } from "stream/consumers";
-import SingleComment from "./Comment";
+import SingleComment from "./SingleComment";
 interface ICommentService {
     example: SingleComment;
 }
@@ -12,8 +12,6 @@ class CommentService {
     }
 
     addComment(example: SingleComment) {
-        localStorage.setItem("one", JSON.stringify(example));
-        console.log(localStorage.getItem("one"));
     }
 
 }

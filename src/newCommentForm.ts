@@ -1,14 +1,14 @@
 export function newCommentForm(): HTMLDivElement | null {
-  const commentsBlock = <HTMLDivElement>document.createElement("div");
-  commentsBlock.classList.add(".commentsBlock");
-  const textarea = <HTMLTextAreaElement | null>(
-    document.getElementById("comment")
-  );
-  const warning = <HTMLDivElement | null>document.querySelector(".warning");
-  const sendBtn = <HTMLButtonElement | null>document.querySelector(".send-btn");
-  const commentForm = <HTMLFormElement | null>(
-    document.getElementById("commentForm")
-  );
+  const commentsBlock: HTMLDivElement = document.createElement("div");
+  commentsBlock.classList.add("commentsBlock");
+  const textarea = document.getElementById(
+    "comment"
+  ) as HTMLTextAreaElement | null;
+  const warning: HTMLDivElement | null = document.querySelector(".warning");
+  const sendBtn: HTMLButtonElement | null = document.querySelector(".send-btn");
+  const commentForm = document.getElementById(
+    "commentForm"
+  ) as HTMLFormElement | null;
 
   textarea.addEventListener("input", function () {
     const messageLength = textarea.value.length;

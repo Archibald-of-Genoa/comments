@@ -1,25 +1,17 @@
 import "./styles/reset.css";
 import "./styles/style.scss";
 
-import { loadUserData } from "./fetchUserData";
-import { addContentMock } from "./contentMock";
+import { loadUserData } from "./loadUserData";
 import { commentsFilter } from "./commentsFilter";
 import { newCommentForm } from "./newCommentForm";
-import SingleComment from "./Comment";
-import CommentService from "./CommentService";
+import Layout from "./Layout";
 
 document.addEventListener("DOMContentLoaded", function () {
-  addContentMock(9);
-  commentsFilter();
-  newCommentForm();
+  new Layout(9);
 
   loadUserData("https://randomuser.me/api/").then((userData) => {
     if (userData) {
-
-    const example = new SingleComment(userData.uuid, userData.username, userData.avatar)
-    const control = new CommentService(example)
-
-      const userAvatarImage = example.avatar;
+      const userAvatarImage = userData.avatar;
       const userAvatar =
         document.querySelectorAll<HTMLImageElement>(".userAvatar");
 
@@ -88,6 +80,4 @@ document.addEventListener("DOMContentLoaded", function () {
   //     document.querySelector(".publishedCommentText")
   //   );
   // });
-
-  
 });
