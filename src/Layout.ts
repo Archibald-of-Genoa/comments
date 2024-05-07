@@ -21,7 +21,7 @@ class Layout {
   private addContentMock(mockCount: number | null): void {
     const contentMock: HTMLDivElement = document.querySelector(".contentMock");
     for (let i = 0; i < mockCount; i++) {
-      const subcontent = <HTMLDivElement | null>document.createElement("div");
+      const subcontent = document.createElement("div") as HTMLDivElement | null;
       subcontent.classList.add("contentMockElement");
       if (i === mockCount - 1) {
         subcontent.classList.add("span");
@@ -81,7 +81,6 @@ class Layout {
 
     commentForm.addEventListener("submit", function (event: Event) {
       event.preventDefault();
-      const newPublishedComment = document.createElement("div");
 
       const commentText = textarea.value;
       if (commentText.trim() === "") return;
