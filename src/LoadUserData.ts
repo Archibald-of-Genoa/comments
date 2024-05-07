@@ -20,11 +20,13 @@ class LoadUserData implements User {
       }
 
       const data = await response.json();
-      return this.userData = {
+
+      this.userData = {
         userId: data.results[0].login.uuid,
         userName: data.results[0].login.username,
         avatar: data.results[0].picture.large,
       };
+      return this.userData;
 
     } catch (error) {
       console.error("Ошибка при получении данных", error);

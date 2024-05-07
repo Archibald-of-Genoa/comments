@@ -2,8 +2,6 @@ import arrowImage from "@/assets/Arrow.svg";
 import heartImage from "@/assets/heart.svg";
 import replyImage from "@/assets/reply.svg";
 
-
-
 class Layout {
   private mockCount: number;
 
@@ -30,7 +28,7 @@ class Layout {
     }
   }
 
-  private commentsFilter(): void {
+  commentsFilter(): void {
     const arrow = document.getElementById("arrow") as HTMLImageElement | null;
     const heart = document.getElementById("heart") as HTMLImageElement | null;
     const reply = document.querySelector(".reply") as HTMLImageElement | null;
@@ -54,39 +52,64 @@ class Layout {
     }
   }
 
-  private newCommentForm(): HTMLDivElement | null {
-    const commentsBlock: HTMLDivElement = document.createElement("div");
-    commentsBlock.classList.add("commentsBlock");
-    const textarea = document.getElementById(
-      "comment"
-    ) as HTMLTextAreaElement | null;
+  newCommentForm(): HTMLDivElement | null {
+    const wrapper: HTMLDivElement | null = document.querySelector(".wrapper");
     const warning: HTMLDivElement | null = document.querySelector(".warning");
     const sendBtn: HTMLButtonElement | null =
       document.querySelector(".send-btn");
     const commentForm = document.getElementById(
       "commentForm"
     ) as HTMLFormElement | null;
+    const textarea = document.getElementById(
+      "comment"
+    ) as HTMLTextAreaElement | null;
 
-    textarea.addEventListener("input", function () {
-      const messageLength = textarea.value.length;
+    const commentsBlock: HTMLDivElement = document.createElement("div");
+    commentsBlock.classList.add("commentsBlock");
+    commentsBlock.innerHTML = /*html*/ `
 
-      if (messageLength >= 1000) {
-        sendBtn.disabled = true;
-        warning.style.display = "block";
-      } else {
-        warning.style.display = "none";
-        sendBtn.disabled = false;
-      }
-    });
+    <div class="newCommentBlock">
+      <img class="userAvatar" alt="Аватар пользователя" />
+      <div div class="userNameAndFormWrapper">
+        <div class="userNameWrapper">
+          <span class="userName"></span>
 
-    commentForm.addEventListener("submit", function (event: Event) {
-      event.preventDefault();
+          <div class="warning">Макс. 1000 символов</div>
+        </div>
 
-      const commentText = textarea.value;
-      if (commentText.trim() === "") return;
+        <form id="commentForm" action="submit">
+          <label for="comment"></label>
+          <textarea
+            name="comment"
+            id="comment"
+            cols="30"
+            rows="10"
+            maxlength="1000"
+            placeholder="Введите текст сообщения"
+            required
+          ></textarea>
 
-      textarea.value = "";
-    });
+          <button type="submit" class="send-btn btn">Отправить</button>
+        </form>
+      </div>
+    </div>
+  
+    `;
+    wrapper.appendChild(commentsBlock);
+
+    // textarea.addEventListener("input", function () {
+    //   const messageLength = textarea.value.length;
+
+    //   if (messageLength >= 10) {
+    //     sendBtn.disabled = true;
+    //     warning.style.display = "block";
+    //   } else {
+    //     warning.style.display = "none";
+    //     sendBtn.disabled = false;
+    //   }
+    // });
+
+    
 
     return commentsBlock;
   }
