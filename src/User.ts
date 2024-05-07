@@ -1,12 +1,12 @@
 import { UUID } from "crypto";
 
-interface ISingleComment {
+interface User {
   userId: UUID;
   userName: string;
   avatar: string;
 }
 
-class SingleComment implements ISingleComment {
+class User implements User {
   userId: UUID;
   userName: string;
   avatar: string;
@@ -16,10 +16,6 @@ class SingleComment implements ISingleComment {
     this.userName = userName;
     this.avatar = avatar;
   }
-
-
-
-
 }
 
-export default SingleComment;
+export default User;

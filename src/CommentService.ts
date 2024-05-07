@@ -1,18 +1,41 @@
-import { json } from "stream/consumers";
-import SingleComment from "./SingleComment";
-interface ICommentService {
-    example: SingleComment;
-}
+import Comment from "./Comment";
+
+
 class CommentService {
-    private comments: SingleComment[] = [];
-    private storageKey: string = 'comments';
+    private localStorageKey = 'comments';
 
-    constructor(example: SingleComment) {
-        this.addComment(example);
+    loadComments(): Comment[] {
+        const storedComments = localStorage.getItem(this.localStorageKey);
+        return storedComments ? JSON.parse(storedComments) : [];
     }
 
-    addComment(example: SingleComment) {
+    saveComments(comments: Comment[]): void {
+        localStorage.setItem(this.localStorageKey, JSON.stringify(comments));
     }
+
+    addComment(comment: Comment): void {
+        const comments = this.loadComments();
+        comments.push(comment);
+        this.saveComments(comments)
+    }
+
+    // toggleFavorite(commentId: string): void {
+    //     const comments = this.loadComments();
+    //     const comment = comments.find(c => c.id === commentId);
+    //     if (comment) {
+    //         comment.isFavorite = !comment.isFavorite;
+    //         this.saveComments(comments);
+    //     }
+    // }
+
+    // updateRating(commentId: string, increment: boolean): void {
+    //     const comments = this.loadComments();
+    //     const comment = comments.find(c => c.id === commentId);
+    //     if (comment) {
+    //         comment.rating += increment ? 1 : -1;
+    //         this.saveComments(comments);
+    //     }
+    // }    
 
 }
 
