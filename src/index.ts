@@ -4,6 +4,9 @@ import "./styles/style.scss";
 import Layout from "./Layout";
 import UIManager from "./UIManager";
 import LoadUserData from "./LoadUserData";
+import User from "./User";
+import Comment from "./Comment";
+import CommentService from "./CommentService";
 
 export const wrapper: HTMLDivElement | null =
   document.querySelector(".wrapper");
@@ -11,12 +14,15 @@ export const warning: HTMLDivElement | null =
   document.querySelector(".warning");
 export const sendBtn: HTMLButtonElement | null =
   document.querySelector(".send-btn");
-export const commentForm = document.getElementById(
-  "commentForm"
-) as HTMLFormElement | null;
 export const textarea = document.getElementById(
   "comment"
 ) as HTMLTextAreaElement | null;
+
+export const commentsBlock: HTMLDivElement =
+  document.querySelector(".commentsBlock");
+export const commentForm = document.getElementById(
+  "commentForm"
+) as HTMLFormElement | null;
 
 new Layout(9);
 
@@ -29,22 +35,23 @@ document.addEventListener("DOMContentLoaded", function () {
       const update = new UIManager();
       update.updateAvatar(userdata.avatar);
       update.updateUserName(userdata.userName);
-    } else {
-      console.error("Не удалось загрузить данные пользователя");
+      const user = new User(
+        userdata.userId,
+        userdata.userName,
+        userdata.avatar
+      );
+
+      commentForm.addEventListener("submit", function (e: Event) {
+        e.preventDefault();
+
+        if (textarea) {
+          const commentText = textarea.value;
+          const newComment = new Comment(user, commentText);
+          const addComment = new CommentService();
+          addComment.addComment(newComment)
+          console.log(newComment);
+        }
+      });
     }
   });
-
-    textarea.addEventListener("input", function () {
-      console.log(textarea.value);
-      //   const messageLength = textarea.value.length;
-      //   sendBtn.disabled = true;
-      //   warning.style.display = "block";
-      //   if (messageLength >= 10) {
-      //     sendBtn.disabled = true;
-      //     warning.style.display = "block";
-      //   } else {
-      //     warning.style.display = "none";
-      //     sendBtn.disabled = false;
-      //   }
-    });
 });

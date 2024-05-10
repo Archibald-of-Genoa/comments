@@ -16,6 +16,7 @@ class User implements User {
     this.userName = userName;
     this.avatar = avatar;
   }
+
 }
 
 export default User;

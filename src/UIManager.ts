@@ -1,4 +1,6 @@
+import { commentsBlock } from ".";
 import { UUID } from "crypto";
+import { textarea } from ".";
 
 class UIManager {
   avatar: string;
@@ -24,16 +26,11 @@ class UIManager {
   }
 
   addCommentUI() {
-    const newPublishedComment: HTMLDivElement = document.createElement("div");
-    const commentsBlock: HTMLDivElement =
-      document.querySelector(".commentsBlock");
-    const textarea = document.getElementById("comment") as HTMLTextAreaElement;
+    const newComment: HTMLDivElement = document.createElement("div");
+    newComment.classList.add('publishedComment');
     const commentText = textarea.value;
-    if (commentText.trim() === "") return;
 
-    textarea.value = "";
-
-    newPublishedComment.innerHTML = `
+    newComment.innerHTML = `
     <div class="publishedComment">
             <img class="userAvatar" alt="Аватар пользователя" />
 
@@ -55,7 +52,7 @@ class UIManager {
           </div>
     `;
 
-    commentsBlock.appendChild(newPublishedComment);
+    commentsBlock.appendChild(newComment);
   }
 
 

@@ -1,4 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
 import User from "./User";
+
+
+
+
 
 interface Comment {
   id: string;
@@ -10,8 +15,7 @@ interface Comment {
   isFavorite: boolean;
 }
 
-
-class Comment implements Comment{
+class Comment implements Comment {
   id: string;
   author: User;
   content: string;
@@ -20,26 +24,18 @@ class Comment implements Comment{
   replies: Comment[];
   isFavorite: boolean;
 
-  constructor(
-      id: string,
-      author: User,
-      content: string,
-      timestamp: string,
-      rating: number = 0,
-      replies: Comment[] = [],
-      isFavorite: boolean = false
-  ) {
-      this.id = id;
-      this.author = author;
-      this.content = content;
-      this.timestamp = this.getFormattedDate();
-      this.rating = rating;
-      this.replies = replies;
-      this.isFavorite = isFavorite;
+  constructor(author: User, content: string) {
+    this.id = uuidv4();
+    this.author = author;
+    this.content = content;
+    this.timestamp = this.getFormattedDate();
+    this.rating = 0;
+    this.replies = [];
+    this.isFavorite = false;
   }
 
   addReply(comment: Comment): void {
-      this.replies.push(comment);
+    this.replies.push(comment);
   }
 
   getFormattedDate() {
@@ -51,6 +47,8 @@ class Comment implements Comment{
 
     return `${day}.${month} ${hours}:${minutes}`;
   }
+
+
 }
 
 export default Comment;
