@@ -38,8 +38,33 @@
             </li>
           </ul>
         </nav>
+        <div class="commentsBlock">
+          <div class="newCommentBlock">
+            <img class="userAvatar" alt="Аватар пользователя" />
+            <div div class="userNameAndFormWrapper">
+              <div class="userNameWrapper">
+                <span class="userName"></span>
 
+                <div class="warning">Макс. 1000 символов</div>
+              </div>
 
+              <form id="commentForm" action="submit">
+                <label for="comment"></label>
+                <textarea
+                  name="comment"
+                  id="comment"
+                  cols="30"
+                  rows="10"
+                  maxlength="1000"
+                  placeholder="Введите текст сообщения"
+                  required
+                ></textarea>
+
+                <button type="submit" class="send-btn btn">Отправить</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </body>
