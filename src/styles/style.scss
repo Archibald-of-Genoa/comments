@@ -160,8 +160,6 @@ aside {
     &:focus {
       outline: none;
     }
-
-
   }
 
   #arrow {
@@ -314,6 +312,17 @@ aside {
   }
 }
 
+.commentAvatar {
+  width: 61px;
+  height: 61px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.commentUserName {
+  @include font-user;
+}
+
 .date {
   @include font-sm;
   opacity: 0.4;
@@ -330,10 +339,8 @@ aside {
   border: none;
   text-align: right;
   background-color: transparent;
-  background-image: url('@/assets/reply.svg');
+  background-image: url("@/assets/reply.svg");
   background-repeat: no-repeat;
   background-position: left;
   cursor: pointer;
-
 }
-

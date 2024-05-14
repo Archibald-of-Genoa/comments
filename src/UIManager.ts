@@ -1,6 +1,8 @@
 import { commentsBlock } from ".";
 import { UUID } from "crypto";
 import { textarea } from ".";
+import Comment from "./Comment";
+import CommentService from "./CommentService";
 
 class UIManager {
   avatar: string;
@@ -10,36 +12,35 @@ class UIManager {
   updateAvatar(avatar: string) {
     this.avatar = avatar;
 
-    const userAvatar =
-      document.querySelectorAll<HTMLImageElement>(".userAvatar");
+    const userAvatar: HTMLImageElement | null =
+      document.querySelector(".userAvatar");
 
-    userAvatar.forEach((avatarElement) => {
-      avatarElement.src = avatar;
-    });
+      userAvatar.src = avatar;
+
   }
 
   updateUserName(userName: string) {
     this.userName = userName;
 
-    const userNameElement = document.querySelectorAll<HTMLDivElement>(".userName");
-    userNameElement.forEach((name) => (name.textContent = this.userName));
+    const userNameElement: HTMLDivElement | null = document.querySelector(".userName");
+    userNameElement.textContent = this.userName;
   }
 
-  addCommentUI() {
+  addCommentUI(Comment: Comment) {
     const newComment: HTMLDivElement = document.createElement("div");
     newComment.classList.add('publishedComment');
     const commentText = textarea.value;
 
-    newComment.innerHTML = `
+    newComment.innerHTML = /*html*/`
     <div class="publishedComment">
-            <img class="userAvatar" alt="Аватар пользователя" />
+              <img class="commentAvatar" src="${Comment.author.avatar}" alt="Аватар пользователя" />
 
             <div class="userNameAndFormWrapper">
 
                 <div class="userNameWrapper">
-                  <span class="userName"></span>
+                  <span class="commentUserName">${Comment.author.userName}</span>
 
-                  <div class="date"></div>
+                  <div class="date">${Comment.timestamp}</div>
                 </div>
 
                 <div class="publishedCommentText">${commentText}</div>

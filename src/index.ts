@@ -47,9 +47,26 @@ document.addEventListener("DOMContentLoaded", function () {
         if (textarea) {
           const commentText = textarea.value;
           const newComment = new Comment(user, commentText);
-          const addComment = new CommentService();
-          addComment.addComment(newComment)
-          console.log(newComment);
+          const commentSerice = new CommentService();
+          const uimanager = new UIManager();
+          commentSerice.addComment(newComment);
+          uimanager.addCommentUI(newComment);
+          const fetchData = new LoadUserData();
+          textarea.value = '';
+
+          fetchData.load("https://randomuser.me/api/").then(() => {
+            const userdata = fetchData.getData();
+            if (userdata) {
+              const update = new UIManager();
+              update.updateAvatar(userdata.avatar);
+              update.updateUserName(userdata.userName);
+              const user = new User(
+                userdata.userId,
+                userdata.userName,
+                userdata.avatar
+              );
+            }
+          });
         }
       });
     }
