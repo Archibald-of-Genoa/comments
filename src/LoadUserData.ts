@@ -1,5 +1,6 @@
 import { UUID } from "crypto";
 import User from "./User";
+import UIManager from "./UIManager";
 
 class LoadUserData implements User {
   private userData: User | null = null;
@@ -27,16 +28,28 @@ class LoadUserData implements User {
         avatar: data.results[0].picture.large,
       };
       return this.userData;
-
     } catch (error) {
       console.error("Ошибка при получении данных", error);
       this.userData = null;
     }
   }
 
-
   getData(): User | null {
     return this.userData;
+  }
+
+  fetchData() {
+    this.load("https://randomuser.me/api/").then(() => {
+      const userdata = this.getData();
+
+      if(userdata) {
+        const uimanager = new UIManager();
+
+        uimanager.updateAvatar(userdata.avatar);
+        uimanager.updateUserName(userdata.userName);
+      }
+
+    });
   }
 }
 

@@ -25,50 +25,27 @@ export const commentForm = document.getElementById(
 ) as HTMLFormElement | null;
 
 new Layout(9);
+const loadUserData = new LoadUserData();
+const uimanager = new UIManager();
 
 document.addEventListener("DOMContentLoaded", function () {
-  const fetchData = new LoadUserData();
+  loadUserData.fetchData();
 
-  fetchData.load("https://randomuser.me/api/").then(() => {
-    const userdata = fetchData.getData();
-    if (userdata) {
-      const update = new UIManager();
-      update.updateAvatar(userdata.avatar);
-      update.updateUserName(userdata.userName);
-      const user = new User(
-        userdata.userId,
-        userdata.userName,
-        userdata.avatar
-      );
+  commentForm.addEventListener("submit", function (e: Event) {
+    e.preventDefault();
 
-      commentForm.addEventListener("submit", function (e: Event) {
-        e.preventDefault();
+    if(textarea) {
+      const getData = loadUserData.getData();
+      if(getData) {
+        const comment = new Comment(getData, textarea.value);
+        const commentService = new CommentService();
+        commentService.addComment(comment);
+        uimanager.addCommentUI(comment);
+        loadUserData.fetchData();
 
-        if (textarea) {
-          const commentText = textarea.value;
-          const newComment = new Comment(user, commentText);
-          const commentSerice = new CommentService();
-          const uimanager = new UIManager();
-          commentSerice.addComment(newComment);
-          uimanager.addCommentUI(newComment);
-          const fetchData = new LoadUserData();
-          textarea.value = '';
-
-          fetchData.load("https://randomuser.me/api/").then(() => {
-            const userdata = fetchData.getData();
-            if (userdata) {
-              const update = new UIManager();
-              update.updateAvatar(userdata.avatar);
-              update.updateUserName(userdata.userName);
-              const user = new User(
-                userdata.userId,
-                userdata.userName,
-                userdata.avatar
-              );
-            }
-          });
-        }
-      });
+        console.log(comment);
+      }
     }
-  });
+  })
+  
 });

@@ -54,6 +54,7 @@ class UIManager {
     `;
 
     commentsBlock.appendChild(newComment);
+    textarea.value = '';
   }
 
 
