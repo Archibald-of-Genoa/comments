@@ -47,6 +47,7 @@ class LoadUserData implements User {
 
         uimanager.updateAvatar(userdata.avatar);
         uimanager.updateUserName(userdata.userName);
+        
       }
 
     });
