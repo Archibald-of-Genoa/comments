@@ -41,8 +41,7 @@ class Layout {
         arrow.classList.toggle("select-rotated");
       };
 
-      select.addEventListener("mousedown", toggleArrowRotation);
-      select.addEventListener("mouseup", toggleArrowRotation);
+      select.addEventListener("click", toggleArrowRotation);
     }
     if (heart) {
       heart.src = heartImage;
