@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if(updatedComment) {
           target.textContent = updatedComment.isFavorite ? "В избранном" : "В избранное";
           target.style.backgroundImage = updatedComment.isFavorite ? `url(${heartFilled})` : `url(${heartHollow})`;
-          console.log(updatedComment.isFavorite);
 
         }
 

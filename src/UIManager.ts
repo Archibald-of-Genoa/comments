@@ -35,24 +35,28 @@ class UIManager {
     class="commentAvatar"
     src="${Comment.author.avatar}"
     alt="Аватар пользователя"
-  />
+    />
   
-  <div class="userNameAndFormWrapper">
-    <div class="userNameWrapper">
-      <span class="commentUserName">${Comment.author.userName}</span>
-  
-      <div class="date">${Comment.timestamp}</div>
+    <div class="userNameAndFormWrapper">
+      <div class="userNameWrapper">
+        <span class="commentUserName">${Comment.author.userName}</span>
+    
+        <div class="date">${Comment.timestamp}</div>
+      </div>
+    
+      <div class="publishedCommentText">${commentText}</div>
+      <div class="actionButtons">
+        <button class="reply">Ответить</button>
+        <button class="toFavorite" data-comment-id="${Comment.id}">
+          В избранное
+        </button>
+        <div class="ratingControl">
+          <button class="decreaseRating" title="Опустить рейтинг">-</button>
+          <span class="ratingCount">0</span>
+          <button class="increaseRating" title="Поднять рейтинг">+</button>
+        </div>
+      </div>
     </div>
-  
-    <div class="publishedCommentText">${commentText}</div>
-    <div class="actionButtons">
-      <button class="reply">Ответить</button>
-      <button class="toFavorite" data-comment-id="${Comment.id}">В избранное</button>
-    </div>
-  </div>
-
-
-
     `;
 
     commentsBlock.appendChild(newComment);

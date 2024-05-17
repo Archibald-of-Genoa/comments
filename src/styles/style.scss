@@ -37,7 +37,6 @@ $primary-color: #d9d9d9;
   font-size: $font-size-lg;
   font-weight: $font-weight-med;
   color: #122ac0;
-  
 }
 @mixin font-italic {
   font-family: $font-primary;
@@ -300,7 +299,6 @@ aside {
   gap: 30px;
   margin-top: 4rem;
 
-
   .publishedCommentText {
     @include font-lg;
     field-sizing: content;
@@ -361,4 +359,48 @@ aside {
   background-repeat: no-repeat;
   background-position: left;
   cursor: pointer;
+}
+
+.ratingControl {
+  width: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .decreaseRating {
+    @include font-lg;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .increaseRating {
+    @include font-lg;
+    font-weight: $font-weight-med;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    color: #8ac540;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .ratingCount {
+    @include font-lg;
+    color: #8ac540;
+
+    border: none;
+  }
 }
