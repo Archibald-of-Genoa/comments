@@ -37,6 +37,7 @@ $primary-color: #d9d9d9;
   font-size: $font-size-lg;
   font-weight: $font-weight-med;
   color: #122ac0;
+  
 }
 @mixin font-italic {
   font-family: $font-primary;
@@ -215,7 +216,6 @@ aside {
   display: flex;
   justify-content: space-between;
   gap: 30px;
-  margin-bottom: 4rem;
 
   form {
     display: flex;
@@ -298,6 +298,8 @@ aside {
   justify-content: start;
   align-items: center;
   gap: 30px;
+  margin-top: 4rem;
+
 
   .publishedCommentText {
     @include font-lg;
@@ -330,6 +332,9 @@ aside {
 }
 
 .actionButtons {
+  display: flex;
+  justify-content: start;
+  gap: 30px;
 }
 
 .reply {
@@ -340,6 +345,19 @@ aside {
   text-align: right;
   background-color: transparent;
   background-image: url("@/assets/reply.svg");
+  background-repeat: no-repeat;
+  background-position: left;
+  cursor: pointer;
+}
+
+.toFavorite {
+  @include font-lg;
+  width: 145px;
+  opacity: 0.4;
+  border: none;
+  text-align: right;
+  background-color: transparent;
+  background-image: url("@/assets/heartHollow.svg");
   background-repeat: no-repeat;
   background-position: left;
   cursor: pointer;

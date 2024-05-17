@@ -19,23 +19,24 @@ class CommentService {
         this.saveComments(comments)
     }
 
-    // toggleFavorite(commentId: string): void {
-    //     const comments = this.loadComments();
-    //     const comment = comments.find(c => c.id === commentId);
-    //     if (comment) {
-    //         comment.isFavorite = !comment.isFavorite;
-    //         this.saveComments(comments);
-    //     }
-    // }
+    toggleFavorite(commentId: string): Comment | undefined {
+        const comments = this.loadComments();
+        const comment = comments.find(c => c.id === commentId);
+        if (comment) {
+            comment.isFavorite = !comment.isFavorite;
+            this.saveComments(comments);
+        }
+        return comment;
+    }
 
-    // updateRating(commentId: string, increment: boolean): void {
-    //     const comments = this.loadComments();
-    //     const comment = comments.find(c => c.id === commentId);
-    //     if (comment) {
-    //         comment.rating += increment ? 1 : -1;
-    //         this.saveComments(comments);
-    //     }
-    // }    
+    updateRating(commentId: string, increment: boolean): void {
+        const comments = this.loadComments();
+        const comment = comments.find(c => c.id === commentId);
+        if (comment) {
+            comment.rating += increment ? 1 : -1;
+            this.saveComments(comments);
+        }
+    }    
 
 }
 

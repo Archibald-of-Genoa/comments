@@ -47,6 +47,7 @@ class UIManager {
     <div class="publishedCommentText">${commentText}</div>
     <div class="actionButtons">
       <button class="reply">Ответить</button>
+      <button class="toFavorite" data-comment-id="${Comment.id}">В избранное</button>
     </div>
   </div>
 
