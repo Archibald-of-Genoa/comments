@@ -53,16 +53,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
   commentsBlock.addEventListener("click", function (e: Event) {
     const target = e.target as HTMLElement;
+
     if (target.classList.contains("toFavorite")) {
       const commentId = target.getAttribute("data-comment-id");
       if (commentId) {
         const updatedComment = commentService.toggleFavorite(commentId);
-        if(updatedComment) {
-          target.textContent = updatedComment.isFavorite ? "В избранном" : "В избранное";
-          target.style.backgroundImage = updatedComment.isFavorite ? `url(${heartFilled})` : `url(${heartHollow})`;
-
+        if (updatedComment) {
+          target.textContent = updatedComment.isFavorite
+            ? "В избранном"
+            : "В избранное";
+          target.style.backgroundImage = updatedComment.isFavorite
+            ? `url(${heartFilled})`
+            : `url(${heartHollow})`;
+          console.log(updatedComment.isFavorite);
         }
+      }
+    }
 
+    if (target.classList.contains("increaseRating")) {
+      const ratingControl = target.closest(".ratingControl");
+      if (ratingControl) {
+        const ratingCount = ratingControl.querySelector(".ratingCount");
+        if (ratingCount) {
+          const commentId = ratingControl
+            .closest(".publishedComment")
+            ?.querySelector(".toFavorite")
+            ?.getAttribute("data-comment-id");
+
+          if (commentId) {
+            commentService.updateRating(commentId, true);
+            ratingCount.textContent = (
+              parseInt(ratingCount.textContent) + 1
+            ).toString();
+
+          }
+        }
+      }
+    }
+    if (target.classList.contains("decreaseRating")) {
+      const ratingControl = target.closest(".ratingControl");
+      if (ratingControl) {
+        const ratingCount = ratingControl.querySelector(".ratingCount");
+        if (ratingCount) {
+          const commentId = ratingControl
+            .closest(".publishedComment")
+            ?.querySelector(".toFavorite")
+            ?.getAttribute("data-comment-id");
+
+          if (commentId) {
+            commentService.updateRating(commentId, false);
+            ratingCount.textContent = (
+              parseInt(ratingCount.textContent) - 1
+            ).toString();
+
+          }
+        }
       }
     }
   });

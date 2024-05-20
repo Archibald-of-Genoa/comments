@@ -36,7 +36,11 @@ class CommentService {
             comment.rating += increment ? 1 : -1;
             this.saveComments(comments);
         }
-    }    
+    }
+
+
+
+
 
 }
 
