@@ -26,8 +26,10 @@ export const commentForm = document.getElementById(
   "commentForm"
 ) as HTMLFormElement | null;
 
-const toFavoriteBtn: HTMLButtonElement | null =
-  document.querySelector(".toFavorite");
+
+const replyToInput = document.getElementById('replyTo') as HTMLInputElement;
+const replyToId = replyToInput.value;
+
 
 new Layout(9);
 const loadUserData = new LoadUserData();
@@ -37,18 +39,26 @@ const commentService = new CommentService();
 document.addEventListener("DOMContentLoaded", function () {
   loadUserData.fetchData();
 
+
   commentForm.addEventListener("submit", function (e: Event) {
     e.preventDefault();
 
-    if (textarea) {
+    if (replyToId && textarea) {
+      const parentComment: HTMLDivElement | null = document.querySelector(`.comment[data-id="${replyToId}"]`);
+
+    } else if (textarea) {
       const getData = loadUserData.getData();
       if (getData) {
         const comment = new Comment(getData, textarea.value);
         commentService.addComment(comment);
         uimanager.addCommentUI(comment);
+        
         loadUserData.fetchData();
       }
     }
+
+
+
   });
 
   commentsBlock.addEventListener("click", function (e: Event) {
@@ -109,6 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       }
+    }
+
+    if (target.classList.contains('reply')) {
+      textarea.focus();
+      console.log(replyToId);
+
+      
     }
   });
 });
