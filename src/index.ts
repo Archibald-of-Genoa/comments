@@ -33,7 +33,6 @@ new Layout(9);
 const loadUserData = new LoadUserData();
 const uimanager = new UIManager();
 const commentService = new CommentService();
-const getData = loadUserData.getData();
 
 document.addEventListener("DOMContentLoaded", function () {
   loadUserData.fetchData();
@@ -42,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     if (replyToId && textarea) {
+      const getData = loadUserData.getData();
+
       if (getData) {
         const comment = new Comment(getData, textarea.value);
         commentService.addComment(comment);
@@ -49,11 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
         loadUserData.fetchData();
       }
     } else {
+      const getData = loadUserData.getData();
       if (getData) {
         const comment = new Comment(getData, textarea.value);
         commentService.addComment(comment);
         uimanager.addCommentUI(comment);
-
         loadUserData.fetchData();
       }
     }
@@ -118,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (target.classList.contains("reply")) {
-      const comment = new Comment(getData, textarea.value);
+
       textarea.focus();
     }
   });
