@@ -404,3 +404,25 @@ aside {
     border: none;
   }
 }
+
+.repliedComment {
+  width: 916px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 30px;
+  margin-top: 4rem;
+  margin-left: 91px;
+
+  .repliedCommentText {
+    @include font-lg;
+    field-sizing: content;
+    overflow-y: hidden;
+    padding: 20px;
+    padding-left: 0;
+    text-align: justify;
+    outline: none;
+    border: none;
+    resize: none;
+  }
+}

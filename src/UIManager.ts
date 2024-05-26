@@ -7,6 +7,7 @@ import CommentService from "./CommentService";
 class UIManager {
   avatar: string;
   userName: string;
+  reply?: boolean;
 
   updateAvatar(avatar: string) {
     this.avatar = avatar;
@@ -25,12 +26,48 @@ class UIManager {
     userNameElement.textContent = this.userName;
   }
 
-  addCommentUI(Comment: Comment) {
-    const newComment: HTMLDivElement = document.createElement("div");
-    newComment.classList.add("publishedComment");
-    const commentText = textarea.value;
+  addCommentUI(Comment: Comment, reply?: boolean) {
+    if (reply) {
+      const newReply: HTMLDivElement = document.createElement("div");
+      newReply.classList.add("repliedComment");
+      const repliedText = textarea.value;
+      newReply.innerHTML = /*html*/ `
+      <img
+    class="commentAvatar"
+    src="${Comment.author.avatar}"
+    alt="Аватар пользователя"
+    />
+  
+    <div class="userNameAndFormWrapper">
+      <div class="userNameWrapper">
+        <span class="commentUserName">${Comment.author.userName}</span>
+    
+        <div class="date">${Comment.timestamp}</div>
+      </div>
+    
+      <div class="publishedCommentText">${repliedText}</div>
+      <div class="actionButtons">
+        <button class="toFavorite" data-comment-id="${Comment.id}">
+          В избранное
+        </button>
+        <div class="ratingControl">
+          <button class="decreaseRating" title="Опустить рейтинг">-</button>
+          <span class="ratingCount">0</span>
+          <button class="increaseRating" title="Поднять рейтинг">+</button>
+        </div>
+      </div>
+    </div>
+      `;
+      commentsBlock.appendChild(newReply);
+      textarea.value = "";
 
-    newComment.innerHTML = /*html*/ `
+
+    } else {
+      const newComment: HTMLDivElement = document.createElement("div");
+      newComment.classList.add("publishedComment");
+      const commentText = textarea.value;
+
+      newComment.innerHTML = /*html*/ `
     <img
     class="commentAvatar"
     src="${Comment.author.avatar}"
@@ -59,8 +96,9 @@ class UIManager {
     </div>
     `;
 
-    commentsBlock.appendChild(newComment);
-    textarea.value = "";
+      commentsBlock.appendChild(newComment);
+      textarea.value = "";
+    }
   }
 }
 

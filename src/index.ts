@@ -26,39 +26,37 @@ export const commentForm = document.getElementById(
   "commentForm"
 ) as HTMLFormElement | null;
 
-
-const replyToInput = document.getElementById('replyTo') as HTMLInputElement;
+const replyToInput = document.getElementById("replyTo") as HTMLInputElement;
 const replyToId = replyToInput.value;
-
 
 new Layout(9);
 const loadUserData = new LoadUserData();
 const uimanager = new UIManager();
 const commentService = new CommentService();
+const getData = loadUserData.getData();
 
 document.addEventListener("DOMContentLoaded", function () {
   loadUserData.fetchData();
-
 
   commentForm.addEventListener("submit", function (e: Event) {
     e.preventDefault();
 
     if (replyToId && textarea) {
-      const parentComment: HTMLDivElement | null = document.querySelector(`.comment[data-id="${replyToId}"]`);
-
-    } else if (textarea) {
-      const getData = loadUserData.getData();
+      if (getData) {
+        const comment = new Comment(getData, textarea.value);
+        commentService.addComment(comment);
+        uimanager.addCommentUI(comment, true);
+        loadUserData.fetchData();
+      }
+    } else {
       if (getData) {
         const comment = new Comment(getData, textarea.value);
         commentService.addComment(comment);
         uimanager.addCommentUI(comment);
-        
+
         loadUserData.fetchData();
       }
     }
-
-
-
   });
 
   commentsBlock.addEventListener("click", function (e: Event) {
@@ -95,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
             ratingCount.textContent = (
               parseInt(ratingCount.textContent) + 1
             ).toString();
-
           }
         }
       }
@@ -115,17 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
             ratingCount.textContent = (
               parseInt(ratingCount.textContent) - 1
             ).toString();
-
           }
         }
       }
     }
 
-    if (target.classList.contains('reply')) {
+    if (target.classList.contains("reply")) {
+      const comment = new Comment(getData, textarea.value);
       textarea.focus();
-      console.log(replyToId);
-
-      
     }
   });
 });
