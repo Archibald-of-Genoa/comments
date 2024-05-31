@@ -10,21 +10,13 @@ import User from "./User";
 import Comment from "./Comment";
 import CommentService from "./CommentService";
 
-export const wrapper: HTMLDivElement | null =
-  document.querySelector(".wrapper");
-export const warning: HTMLDivElement | null =
-  document.querySelector(".warning");
-export const sendBtn: HTMLButtonElement | null =
-  document.querySelector(".send-btn");
-export const textarea = document.getElementById(
-  "comment"
-) as HTMLTextAreaElement | null;
+export const wrapper: HTMLDivElement | null = document.querySelector(".wrapper");
+export const warning: HTMLDivElement | null = document.querySelector(".warning");
+export const sendBtn: HTMLButtonElement | null = document.querySelector(".send-btn");
+export const textarea = document.getElementById("comment") as HTMLTextAreaElement | null;
 
-export const commentsBlock: HTMLDivElement =
-  document.querySelector(".commentsBlock");
-export const commentForm = document.getElementById(
-  "commentForm"
-) as HTMLFormElement | null;
+export const commentsBlock: HTMLDivElement = document.querySelector(".commentsBlock");
+export const commentForm = document.getElementById("commentForm") as HTMLFormElement | null;
 
 const replyToInput = document.getElementById("replyTo") as HTMLInputElement;
 const replyToId = replyToInput.value;
@@ -40,15 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
   commentForm.addEventListener("submit", function (e: Event) {
     e.preventDefault();
 
-    if (replyToId && textarea) {
-      const getData = loadUserData.getData();
-
-      if (getData) {
-        const comment = new Comment(getData, textarea.value);
-        commentService.addComment(comment);
-        uimanager.addCommentUI(comment, true);
-        loadUserData.fetchData();
-      }
+    if (replyToId) {
+      const parentComment = document.querySelector(`.publishedComment[data-id="${replyToId}"]`);
     } else {
       const getData = loadUserData.getData();
       if (getData) {
@@ -68,9 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (commentId) {
         const updatedComment = commentService.toggleFavorite(commentId);
         if (updatedComment) {
-          target.textContent = updatedComment.isFavorite
-            ? "В избранном"
-            : "В избранное";
+          target.textContent = updatedComment.isFavorite ? "В избранном" : "В избранное";
           target.style.backgroundImage = updatedComment.isFavorite
             ? `url(${heartFilled})`
             : `url(${heartHollow})`;
@@ -91,9 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (commentId) {
             commentService.updateRating(commentId, true);
-            ratingCount.textContent = (
-              parseInt(ratingCount.textContent) + 1
-            ).toString();
+            ratingCount.textContent = (parseInt(ratingCount.textContent) + 1).toString();
           }
         }
       }
@@ -110,16 +91,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (commentId) {
             commentService.updateRating(commentId, false);
-            ratingCount.textContent = (
-              parseInt(ratingCount.textContent) - 1
-            ).toString();
+            ratingCount.textContent = (parseInt(ratingCount.textContent) - 1).toString();
           }
         }
       }
     }
 
     if (target.classList.contains("reply")) {
-
+      const actionButtonsContainer = target.closest(".actionButtons");
+      const commentIdElement = actionButtonsContainer.querySelector("[data-comment-id]");
+      const commentId = commentIdElement?.getAttribute("data-comment-id");
+      replyToInput.value = commentId;
+      console.log(commentId);
       textarea.focus();
     }
   });

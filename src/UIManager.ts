@@ -58,10 +58,8 @@ class UIManager {
       </div>
     </div>
       `;
-      const parentComment = document.querySelector(`.newComment[data-id="${Comment.id}"]`)
       commentsBlock.appendChild(newReply);
       textarea.value = "";
-      console.log('newReply');
 
     } else {
       const newComment: HTMLDivElement = document.createElement("div");
