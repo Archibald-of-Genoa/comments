@@ -17,9 +17,10 @@ export const textarea = document.getElementById("comment") as HTMLTextAreaElemen
 
 export const commentsBlock: HTMLDivElement = document.querySelector(".commentsBlock");
 export const commentForm = document.getElementById("commentForm") as HTMLFormElement | null;
-
 const replyToInput = document.getElementById("replyTo") as HTMLInputElement;
-const replyToId = replyToInput.value;
+export let replyToId = replyToInput.value;
+export let publishedCommentID: string = null;
+
 
 new Layout(9);
 const loadUserData = new LoadUserData();
@@ -31,16 +32,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   commentForm.addEventListener("submit", function (e: Event) {
     e.preventDefault();
+    replyToId = replyToInput.value;
 
     if (replyToId) {
-      const parentComment = document.querySelector(`.publishedComment[data-id="${replyToId}"]`);
+      const getData = loadUserData.getData();
+      if (getData) {
+        const comment = new Comment(getData, textarea.value);
+        commentService.addComment(comment);
+        loadUserData.fetchData();
+        uimanager.addReplyUI(comment);
+        replyToInput.value = "";
+
+
+
+      }
     } else {
       const getData = loadUserData.getData();
       if (getData) {
         const comment = new Comment(getData, textarea.value);
         commentService.addComment(comment);
-        uimanager.addCommentUI(comment);
         loadUserData.fetchData();
+        uimanager.addCommentUI(comment);
+        replyToInput.value = "";
+
       }
     }
   });
@@ -102,8 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const commentIdElement = actionButtonsContainer.querySelector("[data-comment-id]");
       const commentId = commentIdElement?.getAttribute("data-comment-id");
       replyToInput.value = commentId;
-      console.log(commentId);
+      publishedCommentID = commentId;
       textarea.focus();
+      console.log(publishedCommentID);
     }
   });
 });

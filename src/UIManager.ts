@@ -1,8 +1,6 @@
-import { commentsBlock } from ".";
-import { UUID } from "crypto";
+import { commentsBlock, publishedCommentID } from ".";
 import { textarea } from ".";
 import Comment from "./Comment";
-import CommentService from "./CommentService";
 
 class UIManager {
   avatar: string;
@@ -12,8 +10,7 @@ class UIManager {
   updateAvatar(avatar: string) {
     this.avatar = avatar;
 
-    const userAvatar: HTMLImageElement | null =
-      document.querySelector(".userAvatar");
+    const userAvatar: HTMLImageElement | null = document.querySelector(".userAvatar");
 
     userAvatar.src = avatar;
   }
@@ -21,17 +18,18 @@ class UIManager {
   updateUserName(userName: string) {
     this.userName = userName;
 
-    const userNameElement: HTMLDivElement | null =
-      document.querySelector(".userName");
+    const userNameElement: HTMLDivElement | null = document.querySelector(".userName");
     userNameElement.textContent = this.userName;
   }
 
-  addCommentUI(Comment: Comment, reply?: boolean) {
-    if (reply) {
-      const newReply: HTMLDivElement = document.createElement("div");
-      newReply.classList.add("repliedComment");
-      const repliedText = textarea.value;
-      newReply.innerHTML = /*html*/ `
+  addReplyUI(Comment: Comment) {
+    const parentComment = document.querySelector(
+      `.publishedComment[data-newComment-id="${publishedCommentID}"]`
+    );
+    const newReply: HTMLDivElement = document.createElement("div");
+    newReply.classList.add("repliedComment");
+    const repliedText = textarea.value;
+    newReply.innerHTML = /*html*/ `
       <img
     class="commentAvatar"
     src="${Comment.author.avatar}"
@@ -58,15 +56,16 @@ class UIManager {
       </div>
     </div>
       `;
-      commentsBlock.appendChild(newReply);
-      textarea.value = "";
+    parentComment.appendChild(newReply);
+    textarea.value = "";
+  }
 
-    } else {
-      const newComment: HTMLDivElement = document.createElement("div");
-      newComment.classList.add("publishedComment");
-      const commentText = textarea.value;
+  addCommentUI(Comment: Comment) {
+    const newComment: HTMLDivElement = document.createElement("div");
+    newComment.classList.add("publishedComment");
+    const commentText = textarea.value;
 
-      newComment.innerHTML = /*html*/ `
+    newComment.innerHTML = /*html*/ `
             <img
             class="commentAvatar"
             src="${Comment.author.avatar}"
@@ -94,11 +93,10 @@ class UIManager {
               </div>
             </div>
     `;
+    newComment.setAttribute("data-newComment-id", Comment.id);
 
-      commentsBlock.appendChild(newComment);
-      textarea.value = "";
-      console.log('newComment');
-    }
+    commentsBlock.appendChild(newComment);
+    textarea.value = "";
   }
 }
 
