@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const ratingCount = ratingControl.querySelector(".ratingCount");
         if (ratingCount) {
           const commentId = ratingControl
-            .closest(".publishedComment")
+            .closest(".publishedComment, .repliedComment")
             ?.querySelector(".toFavorite")
             ?.getAttribute("data-comment-id");
 
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const ratingCount = ratingControl.querySelector(".ratingCount");
         if (ratingCount) {
           const commentId = ratingControl
-            .closest(".publishedComment")
+            .closest(".publishedComment, .repliedComment")
             ?.querySelector(".toFavorite")
             ?.getAttribute("data-comment-id");
 
