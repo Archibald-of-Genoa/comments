@@ -24,7 +24,7 @@ class UIManager {
 
   addReplyUI(Comment: Comment) {
     const parentComment = document.querySelector(
-      `.publishedComment[data-newComment-id="${publishedCommentID}"]`
+      `.publishedCommentBlock[data-newComment-id="${publishedCommentID}"]`
     );
     const newReply: HTMLDivElement = document.createElement("div");
     newReply.classList.add("repliedComment");
@@ -58,14 +58,16 @@ class UIManager {
       `;
     parentComment.appendChild(newReply);
     textarea.value = "";
+
   }
 
   addCommentUI(Comment: Comment) {
     const newComment: HTMLDivElement = document.createElement("div");
-    newComment.classList.add("publishedComment");
+    newComment.classList.add("publishedCommentBlock");
     const commentText = textarea.value;
 
     newComment.innerHTML = /*html*/ `
+            <div class="publishedComment">
             <img
             class="commentAvatar"
             src="${Comment.author.avatar}"
@@ -92,6 +94,8 @@ class UIManager {
                 </div>
               </div>
             </div>
+            </div>
+            
     `;
     newComment.setAttribute("data-newComment-id", Comment.id);
 
