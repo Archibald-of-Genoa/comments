@@ -38,6 +38,17 @@ class CommentService {
         }
     }
 
+    parseTimestamp(timestamp: string): Date {
+        const [dayMonth, time] = timestamp.split(" ");
+        const [day, month] = dayMonth.split(".").map(Number);
+        const [hours, minutes] = time.split(":").map(Number);
+        const now = new Date();
+        const year = now.getFullYear();
+
+        return new Date(year, month - 1, day, hours, minutes, 0)
+
+    }
+
 
 
 
