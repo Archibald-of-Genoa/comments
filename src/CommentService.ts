@@ -53,6 +53,10 @@ class CommentService {
         this.parseTimestamp(b.timestamp).getTime() - this.parseTimestamp(a.timestamp).getTime()
     );
   }
+
+  sortByRating(): Comment[] {
+    return this.loadComments().sort((a, b) => b.rating - a.rating);
+  }
 }
 
 export default CommentService;

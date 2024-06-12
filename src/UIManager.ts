@@ -89,7 +89,7 @@ class UIManager {
                 </button>
                 <div class="ratingControl">
                   <button class="decreaseRating" title="Опустить рейтинг">-</button>
-                  <span class="ratingCount">0</span>
+                  <span class="ratingCount">${Comment.rating}</span>
                   <button class="increaseRating" title="Поднять рейтинг">+</button>
                 </div>
               </div>

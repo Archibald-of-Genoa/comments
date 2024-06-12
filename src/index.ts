@@ -16,6 +16,8 @@ export const sendBtn: HTMLButtonElement | null = document.querySelector(".send-b
 export const textarea = document.getElementById("comment") as HTMLTextAreaElement | null;
 
 export const commentsBlock: HTMLDivElement = document.querySelector(".commentsBlock");
+export const publishedCommentBlock: HTMLDivElement =
+  document.querySelector(".publishedCommentBlock");
 export const commentForm = document.getElementById("commentForm") as HTMLFormElement | null;
 const replyToInput = document.getElementById("replyTo") as HTMLInputElement;
 export let replyToId = replyToInput.value;
@@ -123,10 +125,17 @@ document.addEventListener("DOMContentLoaded", function () {
     switch (sortValue) {
       case "byDate":
         sortedComments = commentService.sortByDate();
-        break
+        break;
       case "byRating":
-        console.log("lsdkflsdk");
+        sortedComments = commentService.sortByRating();
     }
     uimanager.renderComments(sortedComments);
   });
+
+  // Вот так бы выглядело первоначальное состояние отображаемых комментариев, но
+  // у меня всё завязано на инициализирующий запрос на сервер при загрузке
+  // страницы и сопутствующие UI-функции.
+
+  // const initialCommentsState = commentService.sortByDate();
+  // uimanager.renderComments(initialCommentsState)
 });
