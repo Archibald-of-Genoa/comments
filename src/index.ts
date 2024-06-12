@@ -21,7 +21,6 @@ const replyToInput = document.getElementById("replyTo") as HTMLInputElement;
 export let replyToId = replyToInput.value;
 export let publishedCommentID: string = null;
 
-
 new Layout(9);
 const loadUserData = new LoadUserData();
 const uimanager = new UIManager();
@@ -42,9 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
         loadUserData.fetchData();
         uimanager.addReplyUI(comment);
         replyToInput.value = "";
-
-
-
       }
     } else {
       const getData = loadUserData.getData();
@@ -54,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
         loadUserData.fetchData();
         uimanager.addCommentUI(comment);
         replyToInput.value = "";
-
       }
     }
   });
@@ -118,7 +113,20 @@ document.addEventListener("DOMContentLoaded", function () {
       replyToInput.value = commentId;
       publishedCommentID = commentId;
       textarea.focus();
-      console.log(publishedCommentID);
     }
+  });
+
+  document.getElementById("comment-sort").addEventListener("change", function (e: Event) {
+    const select = e.target as HTMLSelectElement;
+    const sortValue = select.value;
+    let sortedComments: Comment[] = [];
+    switch (sortValue) {
+      case "byDate":
+        sortedComments = commentService.sortByDate();
+        break
+      case "byRating":
+        console.log("lsdkflsdk");
+    }
+    uimanager.renderComments(sortedComments);
   });
 });

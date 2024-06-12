@@ -102,6 +102,11 @@ class UIManager {
     commentsBlock.appendChild(newComment);
     textarea.value = "";
   }
+
+  renderComments(comments: Comment[]) {
+    commentsBlock.innerHTML = "";
+    comments.forEach(comment => this.addCommentUI(comment))
+  }
 }
 
 export default UIManager;
