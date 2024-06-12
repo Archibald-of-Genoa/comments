@@ -41,8 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const comment = new Comment(getData, textarea.value);
         commentService.addComment(comment);
         loadUserData.fetchData();
+        comment.addReply(comment);
         uimanager.addReplyUI(comment);
         replyToInput.value = "";
+
       }
     } else {
       const getData = loadUserData.getData();

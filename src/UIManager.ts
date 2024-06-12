@@ -57,7 +57,6 @@ class UIManager {
       `;
     parentComment.appendChild(newReply);
     textarea.value = "";
-
   }
 
   addCommentUI(Comment: Comment) {
@@ -103,7 +102,8 @@ class UIManager {
 
   renderComments(comments: Comment[]) {
     commentsBlock.innerHTML = "";
-    comments.forEach(comment => this.addCommentUI(comment))
+
+    comments.forEach((comment) => this.addCommentUI(comment));
   }
 }
 
