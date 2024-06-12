@@ -128,6 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
       case "byRating":
         sortedComments = commentService.sortByRating();
+        break;
+      case "byAnswers":
+        sortedComments = commentService.sortByAnswers();
     }
     uimanager.renderComments(sortedComments);
   });

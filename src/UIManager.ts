@@ -28,7 +28,6 @@ class UIManager {
     );
     const newReply: HTMLDivElement = document.createElement("div");
     newReply.classList.add("repliedComment");
-    const repliedText = textarea.value;
     newReply.innerHTML = /*html*/ `
       <img
     class="commentAvatar"
@@ -43,7 +42,7 @@ class UIManager {
         <div class="date">${Comment.timestamp}</div>
       </div>
     
-      <div class="publishedCommentText">${repliedText}</div>
+      <div class="publishedCommentText">${Comment.content}</div>
       <div class="actionButtons">
         <button class="toFavorite" data-comment-id="${Comment.id}">
           В избранное
@@ -64,7 +63,6 @@ class UIManager {
   addCommentUI(Comment: Comment) {
     const newComment: HTMLDivElement = document.createElement("div");
     newComment.classList.add("publishedCommentBlock");
-    const commentText = textarea.value;
 
     newComment.innerHTML = /*html*/ `
             <div class="publishedComment">
@@ -81,7 +79,7 @@ class UIManager {
                 <div class="date">${Comment.timestamp}</div>
               </div>
             
-              <div class="publishedCommentText">${commentText}</div>
+              <div class="publishedCommentText">${Comment.content}</div>
               <div class="actionButtons">
                 <button class="reply">Ответить</button>
                 <button class="toFavorite" data-comment-id="${Comment.id}">

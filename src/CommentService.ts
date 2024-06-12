@@ -57,6 +57,10 @@ class CommentService {
   sortByRating(): Comment[] {
     return this.loadComments().sort((a, b) => b.rating - a.rating);
   }
+
+  sortByAnswers(): Comment[] {
+    return this.loadComments().sort((a, b) => b.replies.length - a.replies.length);
+  }
 }
 
 export default CommentService;
