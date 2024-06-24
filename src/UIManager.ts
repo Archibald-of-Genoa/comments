@@ -55,8 +55,14 @@ class UIManager {
       </div>
     </div>
       `;
-    parentComment.appendChild(newReply);
+      if (parentComment) {
+        parentComment.appendChild(newReply);
+        
+      } else {
+        commentsBlock.appendChild(newReply)
+      }
     textarea.value = "";
+
   }
 
   addCommentUI(Comment: Comment) {
@@ -103,7 +109,15 @@ class UIManager {
   renderComments(comments: Comment[]) {
     commentsBlock.innerHTML = "";
 
-    comments.forEach((comment) => this.addCommentUI(comment));
+    comments.forEach(
+      (comment) => {
+        if (comment.isReply === true) {
+          this.addReplyUI(comment)
+        } else {
+          this.addCommentUI(comment)
+        }
+      }
+    );
   }
 }
 

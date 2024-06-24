@@ -13,6 +13,7 @@ interface Comment {
   rating: number;
   replies: Comment[];
   isFavorite: boolean;
+  isReply: boolean;
 }
 
 class Comment implements Comment {
@@ -23,6 +24,7 @@ class Comment implements Comment {
   rating: number;
   replies: Comment[];
   isFavorite: boolean;
+  isReply: boolean; 
 
   constructor(author: User, content: string) {
     this.id = uuidv4();
@@ -32,6 +34,7 @@ class Comment implements Comment {
     this.rating = 0;
     this.replies = [];
     this.isFavorite = false;
+    this.isReply = false;
   }
 
   addReply(comment: Comment): void {

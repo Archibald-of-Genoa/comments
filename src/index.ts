@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const getData = loadUserData.getData();
       if (getData) {
         const comment = new Comment(getData, textarea.value);
+        comment.isReply = true;
         commentService.addComment(comment);
         loadUserData.fetchData();
         comment.addReply(comment);
