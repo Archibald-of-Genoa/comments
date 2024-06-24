@@ -31,8 +31,7 @@ const commentService = new CommentService();
 document.addEventListener("DOMContentLoaded", function () {
   loadUserData.fetchData();
 
-  commentForm.addEventListener("submit", function (e: Event) {
-    e.preventDefault();
+  function submitCommentForm() {
     replyToId = replyToInput.value;
 
     if (replyToId) {
@@ -40,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (getData) {
         const comment = new Comment(getData, textarea.value);
         comment.isReply = true;
+        comment.addReply(comment);
         commentService.addComment(comment);
         loadUserData.fetchData();
-        comment.addReply(comment);
         uimanager.addReplyUI(comment);
         replyToInput.value = "";
 
@@ -56,6 +55,19 @@ document.addEventListener("DOMContentLoaded", function () {
         uimanager.addCommentUI(comment);
         replyToInput.value = "";
       }
+    }
+  }
+
+  commentForm.addEventListener("submit", function (e: Event) {
+    e.preventDefault();
+    submitCommentForm();
+    
+  });
+
+  textarea.addEventListener("keydown", function (e: KeyboardEvent) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      submitCommentForm();
     }
   });
 

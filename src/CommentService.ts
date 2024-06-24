@@ -1,15 +1,16 @@
 import Comment from "./Comment";
+import { stringify, parse } from "flatted";
 
 class CommentService {
   private localStorageKey = "comments";
 
   loadComments(): Comment[] {
     const storedComments = localStorage.getItem(this.localStorageKey);
-    return storedComments ? JSON.parse(storedComments) : [];
+    return storedComments ? parse(storedComments) : [];
   }
 
   saveComments(comments: Comment[]): void {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(comments));
+    localStorage.setItem(this.localStorageKey, stringify(comments));
   }
 
   addComment(comment: Comment): void {
@@ -58,9 +59,15 @@ class CommentService {
     return this.loadComments().sort((a, b) => b.rating - a.rating);
   }
 
-  sortByAnswers(): Comment[] {
-    return this.loadComments().sort((a, b) => b.replies.length - a.replies.length);
-  }
+sortByAnswers(): Comment[] {
+  const comments = this.loadComments();
+  console.log("Before sorting by answers:", comments);
+  
+  const sortedComments = comments.sort((a, b) => b.replies.length - a.replies.length);
+  
+  console.log("After sorting by answers:", sortedComments);
+  return sortedComments;
+}
 }
 
 export default CommentService;
