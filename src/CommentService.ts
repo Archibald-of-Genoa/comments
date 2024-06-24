@@ -59,15 +59,14 @@ class CommentService {
     return this.loadComments().sort((a, b) => b.rating - a.rating);
   }
 
-sortByAnswers(): Comment[] {
-  const comments = this.loadComments();
-  console.log("Before sorting by answers:", comments);
-  
-  const sortedComments = comments.sort((a, b) => b.replies.length - a.replies.length);
-  
-  console.log("After sorting by answers:", sortedComments);
-  return sortedComments;
-}
+  sortByAnswers(): Comment[] {
+    return this.loadComments().sort((a, b) => b.replies.length - a.replies.length);
+  }
+
+  getFavorites(): Comment[] {
+    const comments = this.loadComments();
+    return comments.filter(comment => comment.isFavorite);
+  }
 }
 
 export default CommentService;
