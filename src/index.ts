@@ -150,6 +150,11 @@ document.addEventListener("DOMContentLoaded", function () {
     uimanager.renderComments(sortedComments);
   });
 
+  document.querySelector(".favorite").addEventListener("click", function () {
+    const favoriteComments = commentService.getFavorites();
+    uimanager.renderComments(favoriteComments);
+  });
+
   // Вот так бы выглядело первоначальное состояние отображаемых комментариев, но
   // у меня всё завязано на инициализирующий запрос на сервер при загрузке
   // страницы и сопутствующие UI-функции.
